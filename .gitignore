@@ -1,0 +1,12 @@
+#FILES FOR INTELLIJ IDEA
+#=======================
+**/.idea/workspace.xml
+**/.idea/modules.xml
+.idea/*
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+build/
+
+gradle.properties

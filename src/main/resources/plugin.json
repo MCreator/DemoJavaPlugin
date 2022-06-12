@@ -1,0 +1,12 @@
+{
+  "id": "demo_java_plugin",
+  "minversion": 202200200000,
+  "weight": 0,
+  "javaplugin": "net.mcreator.demojavaplugin.DemoJavaPlugin",
+  "info": {
+    "name": "MCreator demo Java plugin",
+    "version": "1.0",
+    "description": "Demo Java plugin to demonstrate a typical Java plugin structure",
+    "author": "Pylo"
+  }
+}
