@@ -2,10 +2,11 @@ package net.mcreator.demojavaplugin;
 
 import net.mcreator.plugin.JavaPlugin;
 import net.mcreator.plugin.Plugin;
-import net.mcreator.ui.MCreator;
 import net.mcreator.ui.init.L10N;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import net.mcreator.plugin.events.MCreatorLoadedEvent;
 
 import javax.swing.*;
 
@@ -16,18 +17,17 @@ public class DemoJavaPlugin extends JavaPlugin {
     public DemoJavaPlugin(Plugin plugin) {
         super(plugin);
 
+        addListener(MCreatorLoadedEvent.class, event -> {
+            JMenu menu = new JMenu(L10N.t("plugin.demojava.menu.main"));
+
+            JMenuItem menuItem = new JMenuItem(L10N.t("plugin.demojava.menu.button"));
+            menuItem.addActionListener(e -> event.getMCreator().getActionRegistry().buildWorkspace.doAction());
+            menu.add(menuItem);
+
+            event.getMCreator().getMainMenuBar().add(menu);
+        });
+
         LOG.info("Demo java plugin was loaded");
-    }
-
-    @Override
-    public void eventNewMCreator(MCreator mcreator) {
-        JMenu menu = new JMenu(L10N.t("plugin.demojava.menu.main"));
-
-        JMenuItem menuItem = new JMenuItem(L10N.t("plugin.demojava.menu.button"));
-        menuItem.addActionListener(e -> mcreator.getActionRegistry().buildWorkspace.doAction());
-        menu.add(menuItem);
-
-        mcreator.getMainMenuBar().add(menu);
     }
 
 }
