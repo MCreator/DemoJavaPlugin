@@ -1,7 +1,9 @@
 package net.mcreator.demojavaplugin;
 
+import net.mcreator.element.*;
 import net.mcreator.plugin.JavaPlugin;
 import net.mcreator.plugin.Plugin;
+import net.mcreator.plugin.events.PreGeneratorsLoadingEvent;
 import net.mcreator.ui.init.L10N;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +15,7 @@ import javax.swing.*;
 public class DemoJavaPlugin extends JavaPlugin {
 
     private static final Logger LOG = LogManager.getLogger("Demo Java Plugin");
+    public static ModElementType<?> TEST;
 
     public DemoJavaPlugin(Plugin plugin) {
         super(plugin);
@@ -25,6 +28,13 @@ public class DemoJavaPlugin extends JavaPlugin {
             menu.add(menuItem);
 
             event.getMCreator().getMainMenuBar().add(menu);
+        });
+        addListener(PreGeneratorsLoadingEvent.class, event -> {
+            /*
+             * Shortcuts should use a-z characters. However, they are already all used by default mod element types.
+             */
+            TEST = ModElementTypeLoader.register(new ModElementType<>(
+                    "test", '1', BaseType.OTHER, RecipeType.NONE, TestGUI::new, Test.class));
         });
 
         LOG.info("Demo java plugin was loaded");
