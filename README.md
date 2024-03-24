@@ -10,8 +10,7 @@ Java plugins only work with MCreator 2022.2 or newer.
 In order for the plugin to work, make new file called `gradle.properties` with the following contents:
 
 ```
-mcreator_path=<path to MCreator install directory>
-
+mcreator_path=<path to MCreator core Gradle project directory>
 ```
 
 # Gradle tasks
