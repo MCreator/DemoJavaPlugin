@@ -2,11 +2,10 @@ package net.mcreator.demojavaplugin;
 
 import net.mcreator.plugin.JavaPlugin;
 import net.mcreator.plugin.Plugin;
+import net.mcreator.plugin.events.workspace.MCreatorLoadedEvent;
 import net.mcreator.ui.init.L10N;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import net.mcreator.plugin.events.MCreatorLoadedEvent;
 
 import javax.swing.*;
 
