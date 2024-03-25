@@ -7,16 +7,20 @@ Java plugins only work with MCreator 2022.2 or newer.
 
 # Setup
 
-In order for the plugin to work, make new file called `gradle.properties` with the following contents:
+In order for the plugin to work, make a new file called `gradle.properties` with the following contents:
 
 ```
 mcreator_path=<path to MCreator core Gradle project directory>
 ```
 
 # Gradle tasks
+
 This demo plugin comes with some Gradle tasks to help you with the development of your plugin. 
 
 * `runMCreatorWithPlugin`: Run MCreator with the plugin loaded
 
+There is also IntelliJ IDEA run configuration for this task provided in the repository.
+
 # Exporting
+
 To export the plugin, run `jar` task and find the plugin zip file in `build/libs`.
