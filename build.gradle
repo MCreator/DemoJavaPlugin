@@ -1,6 +1,7 @@
 plugins {
     id "java"
 }
+
 repositories {
     mavenCentral()
     maven { url "https://repo.gradle.org/gradle/libs-releases" } // for gradle-tooling-api
@@ -31,9 +32,22 @@ tasks.register('runMCreatorWithPlugin', JavaExec) {
 
     jvmArgs '--add-opens', 'java.base/java.lang=ALL-UNNAMED'
 
-    classpath = project(':MCreator').sourceSets.main.runtimeClasspath + sourceSets.main.runtimeClasspath
+    classpath = project(':MCreator').sourceSets.main.runtimeClasspath
 
     main = 'net.mcreator.Launcher'
 
     workingDir = mcreator_path
+}
+
+subprojects { subproject ->
+    subproject.plugins.withType(JavaPlugin) {
+        test {
+            dependsOn rootProject.jar
+
+            environment("MCREATOR_PLUGINS_FOLDER", new File(rootProject.projectDir, "/build/libs"))
+            environment("MCREATOR_PLUGINS_DEV", "")
+
+            workingDir = mcreator_path
+        }
+    }
 }
