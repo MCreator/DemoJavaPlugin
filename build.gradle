@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 plugins {
     id "java"
 }
@@ -9,15 +11,19 @@ repositories {
 }
 
 group = 'net.mcreator.demojavaplugin'
-version = '1.0.0'
+version = new JsonSlurper().parse(file('src/main/resources/plugin.json'))['info']['version']
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 dependencies {
     implementation project(':MCreator')
 
-    // Due to Gradle limitations, you need to declare libraries you need but MCreator already provides here
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.23.1'
+    project(':MCreator').afterEvaluate(() ->
+            project(":MCreator").configurations.named("implementation").get().dependencies.each {
+                //noinspection ForeignDelegate
+                implementation it
+            }
+    )
 }
 
 tasks.jar {
